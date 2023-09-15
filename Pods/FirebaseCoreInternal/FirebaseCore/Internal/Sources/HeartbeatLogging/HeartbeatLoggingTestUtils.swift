@@ -22,7 +22,7 @@
   public class HeartbeatLoggingTestUtils: NSObject {
     /// This should mirror the `Constants` enum in the `HeartbeatLogging` module.
     /// See `HeartbeatLogging/Sources/StorageFactory.swift`.
-    public enum Constants {
+    public enum K {
       /// The name of the file system directory where heartbeat data is stored.
       public static let heartbeatFileStorageDirectoryPath = "google-heartbeat-storage"
       /// The name of the user defaults suite where heartbeat data is stored.
@@ -116,7 +116,7 @@
     /// - Throws: An error if the storage container could not be removed.
     public static func removeUnderlyingHeartbeatStorageContainers() throws {
       #if os(tvOS)
-        UserDefaults().removePersistentDomain(forName: Constants.heartbeatUserDefaultsSuiteName)
+        UserDefaults().removePersistentDomain(forName: K.heartbeatUserDefaultsSuiteName)
       #else
 
         let applicationSupportDirectory = FileManager.default
@@ -124,7 +124,7 @@
 
         let heartbeatsDirectoryURL = applicationSupportDirectory
           .appendingPathComponent(
-            Constants.heartbeatFileStorageDirectoryPath, isDirectory: true
+            K.heartbeatFileStorageDirectoryPath, isDirectory: true
           )
         do {
           try FileManager.default.removeItem(at: heartbeatsDirectoryURL)
